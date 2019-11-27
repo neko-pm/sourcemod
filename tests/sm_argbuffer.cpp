@@ -41,7 +41,7 @@ TEST(ArgBuffer, Size) {
 }
 
 TEST(ArgBuffer, Values) {
-	ArgBuffer <int, float, bool, void*> buff(3, 1.0f, false, nullptr); 
+	ArgBuffer <int, float, bool> buff(3, 1.0f, false); 
 	unsigned char *blob = buff;
 	
 	int a = *((int*)blob);
@@ -55,9 +55,6 @@ TEST(ArgBuffer, Values) {
 	bool c = *((bool*)blob);
 	blob += sizeof(bool);
 	EXPECT_EQ(c, false);
-	
-	void *d = (void*)*blob;
-	EXPECT_EQ(d, nullptr);
 }
 
 TEST(ArgBuffer, StringValue) {

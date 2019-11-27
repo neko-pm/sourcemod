@@ -24,8 +24,8 @@ binary.sources += [
 ]
 
 binary.compiler.includes += [
-	os.path.join(builder.sourcePath, 'public'),
-	os.path.join(builder.sourcePath, 'tests', 'googletest', 'googletest', 'include'),
+  os.path.join(builder.sourcePath, 'public'),
+  os.path.join(builder.sourcePath, 'tests', 'googletest', 'googletest', 'include'),
 ]
 
 # Link libgtest to our test suite
