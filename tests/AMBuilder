@@ -16,7 +16,7 @@ binary.sources += [
 libgtest = builder.Add(binary)
 
 # Build test suite
-binary = builder.cxx.Program('Tests');
+binary = builder.cxx.Program('tests');
 
 binary.sources += [
   'main.cpp',
