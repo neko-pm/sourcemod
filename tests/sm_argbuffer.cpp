@@ -34,10 +34,10 @@
 #include <sm_argbuffer.h>
 
 TEST(ArgBuffer, Size) {
-	auto size = sizeof(int) + sizeof(float) + sizeof(bool) + sizeof(void*);
+	size_t size = sizeof(int) + sizeof(float) + sizeof(bool) + sizeof(void*);
 	ArgBuffer <int, float, bool, void*> buff(3, 4.6f, false, nullptr); 
 	
-	EXPECT_EQ(size, buff.size());
+	EXPECT_EQ(size, static_cast<size_t>(buff.size()));
 }
 
 TEST(ArgBuffer, Values) {

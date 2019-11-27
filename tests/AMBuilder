@@ -31,4 +31,7 @@ binary.compiler.includes += [
 # Link libgtest to our test suite
 binary.compiler.linkflags.append(libgtest.binary)
 
+if binary.compiler.like('gcc'):
+  binary.compiler.linkflags.append('-lpthread')
+
 builder.Add(binary)
