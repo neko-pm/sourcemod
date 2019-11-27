@@ -39,4 +39,6 @@ parser.options.add_option('--breakpad-dump', action='store_true', dest='breakpad
 											 default=False, help='Dump and upload breakpad symbols')
 parser.options.add_option('--disable-auto-versioning', action='store_true', dest='disable_auto_versioning',
                        default=False, help='Disable the auto versioning script')
+parser.options.add_option('--tests', action='store_true', dest='enable_tests',
+                       default=False, help='Enable compilation of test suite')
 parser.Configure()

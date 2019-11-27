@@ -121,6 +121,11 @@ class SMConfig(object):
       return False
     return not getattr(builder.options, 'disable_auto_versioning', False)
 
+  def run_tests(self):
+    if builder.backend != 'amb2':
+      return False
+    return getattr(builder.options, 'enable_tests', False)
+
   @property
   def tag(self):
     if builder.options.debug == '1':
@@ -641,6 +646,12 @@ if SM.use_auto_versioning():
   )
   SM.versionlib = builder.Build(
     'versionlib/AMBuilder',
+    { 'SM': SM }
+  )
+
+if SM.run_tests():
+  builder.Build(
+    'tests/AMBuilder',
     { 'SM': SM }
   )
 

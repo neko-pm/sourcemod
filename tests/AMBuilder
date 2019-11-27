@@ -1,0 +1,34 @@
+# vim: set sts=2 ts=8 sw=2 tw=99 et ft=python:
+import os
+
+# Build gtest library
+binary = builder.cxx.StaticLibrary('libgtest')
+
+binary.compiler.includes += [
+  os.path.join(builder.sourcePath, 'tests', 'googletest', 'googletest', 'include'),
+  os.path.join(builder.sourcePath, 'tests', 'googletest', 'googletest'),
+]
+
+binary.sources += [
+  os.path.join(builder.sourcePath, 'tests', 'googletest', 'googletest', 'src', 'gtest-all.cc'),
+]
+
+libgtest = builder.Add(binary)
+
+# Build test suite
+binary = builder.cxx.Program('Tests');
+
+binary.sources += [
+  'main.cpp',
+  'sm_argbuffer.cpp',
+]
+
+binary.compiler.includes += [
+	os.path.join(builder.sourcePath, 'public'),
+	os.path.join(builder.sourcePath, 'tests', 'googletest', 'googletest', 'include'),
+]
+
+# Link libgtest to our test suite
+binary.compiler.linkflags.append(libgtest.binary)
+
+builder.Add(binary)
