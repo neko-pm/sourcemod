@@ -20,11 +20,19 @@ binary = builder.cxx.Program('tests');
 
 binary.sources += [
   'main.cpp',
-  'sm_argbuffer.cpp',
+  
+  os.path.join('public', 'sm_argbuffer.cpp'),
+  os.path.join('public', 'sm_memtable.cpp'),
+  os.path.join('public', 'sm_namehashset.cpp'),
+  os.path.join('public', 'sm_stringhashmap.cpp'),
+  os.path.join('public', 'sm_queue.cpp'),
 ]
 
 binary.compiler.includes += [
+  os.path.join(SM.mms_root, 'core', 'sourcehook'),
   os.path.join(builder.sourcePath, 'public'),
+  os.path.join(builder.sourcePath, 'public', 'amtl'),
+  os.path.join(builder.sourcePath, 'public', 'amtl', 'amtl'),
   os.path.join(builder.sourcePath, 'tests', 'googletest', 'googletest', 'include'),
 ]
 

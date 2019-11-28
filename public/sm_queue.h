@@ -92,7 +92,7 @@ public:
 		iterator iter;
 		for (iter=src.begin(); iter!=src.end(); iter++)
 		{
-			push_back( (*iter) );
+			push( (*iter) );
 		}
 	}
 
@@ -311,7 +311,7 @@ public:
 		iterator iter;
 		for (iter=src.begin(); iter!=src.end(); iter++)
 		{
-			push_back( (*iter) );
+			push( (*iter) );
 		}
 		return *this;
 	}
