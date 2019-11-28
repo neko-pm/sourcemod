@@ -649,12 +649,6 @@ if SM.use_auto_versioning():
     { 'SM': SM }
   )
 
-if SM.run_tests():
-  builder.Build(
-    'tests/AMBuilder',
-    { 'SM': SM }
-  )
-
 # Build SourcePawn externally.
 SP = builder.Build('sourcepawn/AMBuildScript', {
   'external_root': SM,
@@ -700,3 +694,9 @@ builder.Build(BuildScripts, { 'SM': SM })
 
 if builder.options.breakpad_dump:
   builder.Build('tools/buildbot/BreakpadSymbols', { 'SM': SM })
+
+if SM.run_tests():
+  builder.Build(
+    'tests/AMBuilder',
+    { 'SM': SM }
+  )

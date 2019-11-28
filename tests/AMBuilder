@@ -26,6 +26,9 @@ binary.sources += [
   os.path.join('public', 'sm_namehashset.cpp'),
   os.path.join('public', 'sm_stringhashmap.cpp'),
   os.path.join('public', 'sm_queue.cpp'),
+  
+  os.path.join('logic', 'datapack.cpp'),
+  os.path.join(builder.sourcePath, 'core', 'logic', 'CDataPack.cpp'),
 ]
 
 binary.compiler.includes += [
@@ -34,10 +37,14 @@ binary.compiler.includes += [
   os.path.join(builder.sourcePath, 'public', 'amtl'),
   os.path.join(builder.sourcePath, 'public', 'amtl', 'amtl'),
   os.path.join(builder.sourcePath, 'tests', 'googletest', 'googletest', 'include'),
+  os.path.join(builder.sourcePath, 'core', 'logic'),
+  os.path.join(builder.sourcePath, 'sourcepawn', 'include'),
 ]
 
 # Link libgtest to our test suite
-binary.compiler.linkflags.append(libgtest.binary)
+binary.compiler.linkflags += [
+  libgtest.binary,
+]
 
 if binary.compiler.like('gcc'):
   binary.compiler.linkflags.append('-lpthread')
