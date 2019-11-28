@@ -35,7 +35,6 @@
 #include "common_logic.h"
 #include <IAdminSystem.h>
 #include "sm_memtable.h"
-#include <sm_trie.h>
 #include <sh_list.h>
 #include <sh_string.h>
 #include <IForwardSys.h>

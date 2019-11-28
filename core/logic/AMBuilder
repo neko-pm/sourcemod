@@ -71,7 +71,6 @@ for arch in SM.archs:
     'smn_database.cpp',
     'ForwardSys.cpp',
     'AdminCache.cpp',
-    'sm_trie.cpp',
     'smn_console.cpp',
     'ProfileTools.cpp',
     'Logger.cpp',
