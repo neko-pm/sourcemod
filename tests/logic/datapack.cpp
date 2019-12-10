@@ -81,7 +81,7 @@ TEST(CDataPack, PackAndReadFloat) {
 TEST(CDataPack, PackAndReadString) {
 	CDataPack pack;
 
-	constexpr char *str = ":D";
+	constexpr const char *str = ":D";
 	pack.PackString(str);
 	pack.Reset();
 	

@@ -42,7 +42,7 @@ TEST(BaseMemTable, Size) {
 	EXPECT_EQ(table.GetActualMemUsed(), 0);
 	
 	int* mem = nullptr;
-	int index = table.CreateMem(sizeof(int), &(void*)mem);
+	int index = table.CreateMem(sizeof(int), (void**)&mem);
 
 	EXPECT_EQ(table.GetActualMemUsed(), sizeof(int));
 	EXPECT_NE(mem, nullptr);
@@ -56,7 +56,7 @@ TEST(BaseMemTable, Address) {
 	BaseMemTable table(size);
 	
 	int* mem = nullptr;
-	int index = table.CreateMem(sizeof(int), &(void*)mem);
+	int index = table.CreateMem(sizeof(int), (void**)&mem);
 	*mem = 52;
 	
 	ASSERT_GT(index, -1);

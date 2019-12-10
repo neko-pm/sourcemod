@@ -1,4 +1,4 @@
-# vim: set sts=2 ts=8 sw=2 tw=99 et ft=python:
+# vim: set sts=2 ts=2 sw=2 tw=99 et ft=python:
 import os
 
 # Build gtest library
@@ -47,6 +47,10 @@ binary.compiler.linkflags += [
 ]
 
 if binary.compiler.like('gcc'):
+  binary.compiler.cxxflags += [
+    '-std=c++14',
+    '-O3',
+  ]
   binary.compiler.linkflags.append('-lpthread')
 
 builder.Add(binary)
