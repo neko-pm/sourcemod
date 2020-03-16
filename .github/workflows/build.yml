@@ -4,9 +4,10 @@ on: [push, pull_request]
 
 jobs:
   build-windows:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
+        platform: [ubuntu-latest, windows-latest]
         sdk: [csgo, tf2]
     steps:
       - name: checkout repo
@@ -45,6 +46,7 @@ jobs:
           python setup.py install
         
       - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
         with:
           arch: x86
         
@@ -63,5 +65,5 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@master
         with:
-          name: ${{ matrix.sdk }}-${{ github.sha }}
+          name: ${{ runner.os }}-${{ matrix.sdk }}-${{ github.sha }}
           path: sourcemod/build/package/
