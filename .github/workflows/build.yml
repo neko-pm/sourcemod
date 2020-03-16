@@ -63,5 +63,5 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@master
         with:
-          name: ${{ matrix.sdk }}-${{ github.ref }}-${{ github.sha }}
+          name: ${{ matrix.sdk }}-${{ github.sha }}
           path: sourcemod/build/package/
