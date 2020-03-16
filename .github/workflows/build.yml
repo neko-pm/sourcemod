@@ -3,9 +3,10 @@ name: build
 on: [push, pull_request]
 
 jobs:
-  build-windows:
+  build:
     runs-on: ${{ matrix.platform }}
     strategy:
+      fail-fast: false
       matrix:
         platform: [ubuntu-latest, windows-latest]
         sdk: [csgo, tf2]
@@ -41,9 +42,16 @@ jobs:
           path: 'ambuild'
         
       - name: install ambuild
+        if: runner.os == 'Windows'
         run: |
           cd ambuild
           python setup.py install
+        
+      - name: install ambuild
+        if: runner.os == 'Linux'
+        run: |
+          cd ambuild
+          sudo python setup.py install
         
       - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
