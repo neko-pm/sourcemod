@@ -1,0 +1,67 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        sdk: [csgo, tf2]
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+        with:
+          path: 'sourcemod'
+          
+      - name: download submodules
+        run: |
+          cd sourcemod
+          git submodule update --init --recursive
+        
+      - name: download ${{ matrix.sdk }} sdk
+        uses: actions/checkout@v2
+        with:
+          repository: alliedmodders/hl2sdk
+          ref: ${{ matrix.sdk }}
+          path: hl2sdk-${{ matrix.sdk }}
+        
+      - name: download metamod
+        uses: actions/checkout@v2
+        with:
+          repository: alliedmodders/metamod-source
+          ref: 1.10-dev
+          path: 'mmsource-1.10'
+        
+      - name: download ambuild
+        uses: actions/checkout@v2
+        with:
+          repository: alliedmodders/ambuild
+          path: 'ambuild'
+        
+      - name: install ambuild
+        run: |
+          cd ambuild
+          python setup.py install
+        
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x86
+        
+      - name: configure ambuild
+        run: |
+          cd sourcemod
+          mkdir build
+          cd build
+          python ../configure.py --sdks ${{ matrix.sdk }} --no-mysql
+              
+      - name: build
+        run: |
+          cd sourcemod/build
+          ambuild
+        
+      - name: upload artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ matrix.sdk }}-${{ github.ref }}-${{ github.sha }}
+          path: sourcemod/build/package/
