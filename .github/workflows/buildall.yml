@@ -95,7 +95,7 @@ jobs:
           cd sourcemod
           mkdir build
           cd build
-          python ../configure.py --sdks ${{ matrix.sdk }} --no-mysql
+          python ../configure.py --no-mysql
               
       - name: build
         run: |
