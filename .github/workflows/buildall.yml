@@ -95,7 +95,7 @@ jobs:
           cd sourcemod
           mkdir build
           cd build
-          python ../configure.py --no-mysql
+          python ../configure.py --sdks present --no-mysql
               
       - name: build
         run: |
