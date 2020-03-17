@@ -52,6 +52,7 @@ jobs:
         run: |
           cd ambuild
           sudo python setup.py install
+          sudo apt-get install gcc-multilib g++-multilib
         
       - uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
