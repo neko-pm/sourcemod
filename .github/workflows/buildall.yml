@@ -24,6 +24,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: alliedmodders/hl2sdk
+          ref: sdk2013
           path: hl2sdk-proxy-repo
         
       - name: download csgo sdk
